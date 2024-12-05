@@ -1,5 +1,6 @@
 package dev.anirban.stridesync.service;
 
+import dev.anirban.stridesync.dto.request.AuthDto;
 import dev.anirban.stridesync.entity.User;
 import dev.anirban.stridesync.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +19,7 @@ public class UserService {
     private final UserRepo userRepo;
     private final PasswordEncoder encoder;
 
-    public User create(User user) {
+    public User create(AuthDto user) {
 
         if (userRepo.findByUsername(user.getUsername()).isPresent())
             throw new RuntimeException("User already present !!");
@@ -30,7 +31,7 @@ public class UserService {
                 .password(encoder.encode(user.getPassword()))
                 .avatar(user.getAvatar())
                 .gender(user.getGender())
-                .dateOfBirth(Date.valueOf("2002-09-29"))
+                .dateOfBirth(user.getDateOfBirth())
                 .roles(User.UserRole.USER)
                 .createdAt(Timestamp.valueOf(LocalDateTime.now()))
                 .updatedAt(Timestamp.valueOf(LocalDateTime.now()))

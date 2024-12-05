@@ -1,12 +1,13 @@
 package dev.anirban.stridesync.service;
 
 
+import dev.anirban.stridesync.dto.request.AuthDto;
+import dev.anirban.stridesync.dto.response.TokenWrapper;
 import dev.anirban.stridesync.entity.User;
 import dev.anirban.stridesync.security.JwtService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 
@@ -18,27 +19,19 @@ public class AuthService {
     private final JwtService jwtService;
     private final AuthenticationManager authManager;
 
-    public User register(User user) {
+    public User register(AuthDto user) {
         return userService.create(user);
     }
 
-    public String login(User librarianDto) {
+    public TokenWrapper login(AuthDto user) {
 
         authManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
-                        librarianDto.getUsername(), librarianDto.getPassword()
+                        user.getUsername(), user.getPassword()
                 )
         );
 
-        User savedUser = userService.findByUsername(librarianDto.getUsername());
-
-        UserDetails userDetails = org.springframework.security.core.userdetails.User
-                .builder()
-                .username(savedUser.getUsername())
-                .password(savedUser.getPassword())
-                .roles(savedUser.getRoles().name())
-                .build();
-
-        return jwtService.generateToken(userDetails);
+        User savedUser = userService.findByUsername(user.getUsername());
+        return new TokenWrapper(jwtService.generateToken(savedUser));
     }
 }

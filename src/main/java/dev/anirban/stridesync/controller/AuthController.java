@@ -1,7 +1,10 @@
 package dev.anirban.stridesync.controller;
 
 import dev.anirban.stridesync.constants.UrlConstants;
-import dev.anirban.stridesync.entity.User;
+import dev.anirban.stridesync.dto.request.AuthDto;
+import dev.anirban.stridesync.dto.response.ResponseWrapper;
+import dev.anirban.stridesync.dto.response.TokenWrapper;
+import dev.anirban.stridesync.dto.response.UserDto;
 import dev.anirban.stridesync.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,12 +17,14 @@ public class AuthController {
     private final AuthService service;
 
     @PostMapping(UrlConstants.REGISTER_USER)
-    public User register(@RequestBody User user) {
-        return service.register(user);
+    public ResponseWrapper<UserDto> register(@RequestBody AuthDto user) {
+        UserDto data = service.register(user).toUserDto();
+        return new ResponseWrapper<>(data);
     }
 
     @PostMapping(UrlConstants.LOGIN_USER)
-    public String login(@RequestBody User user) {
-        return service.login(user);
+    public ResponseWrapper<TokenWrapper> login(@RequestBody AuthDto user) {
+        TokenWrapper data = service.login(user);
+        return new ResponseWrapper<>(null, data);
     }
 }
