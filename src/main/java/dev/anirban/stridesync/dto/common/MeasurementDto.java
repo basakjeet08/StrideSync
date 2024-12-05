@@ -1,4 +1,4 @@
-package dev.anirban.stridesync.dto.response;
+package dev.anirban.stridesync.dto.common;
 
 import lombok.*;
 

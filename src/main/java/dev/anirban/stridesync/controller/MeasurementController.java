@@ -1,7 +1,7 @@
 package dev.anirban.stridesync.controller;
 
 import dev.anirban.stridesync.constants.UrlConstants;
-import dev.anirban.stridesync.dto.response.MeasurementDto;
+import dev.anirban.stridesync.dto.common.MeasurementDto;
 import dev.anirban.stridesync.dto.response.ResponseWrapper;
 import dev.anirban.stridesync.entity.Measurement;
 import dev.anirban.stridesync.service.MeasurementService;

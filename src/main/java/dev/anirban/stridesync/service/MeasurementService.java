@@ -1,7 +1,7 @@
 package dev.anirban.stridesync.service;
 
 
-import dev.anirban.stridesync.dto.response.MeasurementDto;
+import dev.anirban.stridesync.dto.common.MeasurementDto;
 import dev.anirban.stridesync.entity.Measurement;
 import dev.anirban.stridesync.entity.User;
 import dev.anirban.stridesync.exception.MeasurementNotFound;

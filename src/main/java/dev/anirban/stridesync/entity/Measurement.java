@@ -1,7 +1,7 @@
 package dev.anirban.stridesync.entity;
 
 
-import dev.anirban.stridesync.dto.response.MeasurementDto;
+import dev.anirban.stridesync.dto.common.MeasurementDto;
 import jakarta.persistence.*;
 import lombok.*;
 
