@@ -23,4 +23,10 @@ public class UrlConstants {
     public static final String FIND_SLEEP_QUERY = "/sleeps";
     public static final String PUT_SLEEP_QUERY = "/sleeps";
     public static final String DELETE_SLEEP_QUERY = "/sleeps/{id}";
+
+    // Activity Endpoints
+    public static final String CREATE_ACTIVITY = "/activities";
+    public static final String FIND_ACTIVITY_QUERY = "/activities";
+    public static final String PUT_ACTIVITY_QUERY = "/activities";
+    public static final String DELETE_ACTIVITY_QUERY = "/activities/{id}";
 }
