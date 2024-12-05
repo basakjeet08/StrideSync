@@ -72,9 +72,22 @@ public class User implements UserDetails {
     )
     private List<Measurement> measureHistory;
 
+    @OneToMany(
+            mappedBy = "drankBy",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Water> waterHistory;
+
     public void addMeasureHistory(Measurement measurement) {
         measureHistory.add(measurement);
         measurement.setMeasuredBy(this);
+    }
+
+    public void addWaterHistory(Water water) {
+        waterHistory.add(water);
+        water.setDrankBy(this);
     }
 
     @Override
