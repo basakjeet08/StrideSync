@@ -2,12 +2,13 @@ package dev.anirban.stridesync.service;
 
 import dev.anirban.stridesync.dto.request.AuthDto;
 import dev.anirban.stridesync.entity.User;
+import dev.anirban.stridesync.exception.UserAlreadyExists;
+import dev.anirban.stridesync.exception.UserNotFound;
 import dev.anirban.stridesync.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
@@ -22,7 +23,7 @@ public class UserService {
     public User create(AuthDto user) {
 
         if (userRepo.findByUsername(user.getUsername()).isPresent())
-            throw new RuntimeException("User already present !!");
+            throw new UserAlreadyExists(user.getUsername());
 
         User newUser = User
                 .builder()
@@ -43,6 +44,6 @@ public class UserService {
     public User findByUsername(String username) {
         return userRepo
                 .findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found !!"));
+                .orElseThrow(() -> new UserNotFound(username));
     }
 }

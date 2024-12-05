@@ -1,5 +1,6 @@
 package dev.anirban.stridesync.service;
 
+import dev.anirban.stridesync.exception.UserNotFound;
 import dev.anirban.stridesync.repo.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +19,6 @@ public class MyUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepo
                 .findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("User not found !!"));
+                .orElseThrow(() -> new UserNotFound(username));
     }
 }
