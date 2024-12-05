@@ -36,11 +36,19 @@ public class MeasurementController {
 
     @GetMapping(UrlConstants.FIND_MEASUREMENT_QUERY)
     public ResponseWrapper<List<MeasurementDto>> findMeasurement(
-            @RequestParam(name = "measuredBy", required = false) String username
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestParam(name = "start", required = false) String start,
+            @RequestParam(name = "end", required = false) String end
     ) {
 
-        List<MeasurementDto> data = service
-                .findByMeasuredBy_Username(username)
+        List<Measurement> measurementList;
+
+        if (start != null && end != null)
+            measurementList = service.findByMeasuredBy_UsernameAndMeasuredDateBetween(userDetails.getUsername(), start, end);
+        else
+            measurementList = service.findByMeasuredBy_Username(userDetails.getUsername());
+
+        List<MeasurementDto> data = measurementList
                 .stream()
                 .map(Measurement::toMeasurementDto)
                 .toList();

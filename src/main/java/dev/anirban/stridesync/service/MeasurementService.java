@@ -9,7 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -40,5 +42,21 @@ public class MeasurementService {
 
     public List<Measurement> findByMeasuredBy_Username(String username) {
         return measurementRepo.findByMeasuredBy_Username(username);
+    }
+
+    public List<Measurement> findByMeasuredBy_UsernameAndMeasuredDateBetween(
+            String username,
+            String start,
+            String end
+    ) {
+
+        // Convert String to LocalDate
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate startLocalDate = LocalDate.parse(start, formatter);
+        LocalDate endLocalDate = LocalDate.parse(end, formatter);
+
+        Timestamp startTime = Timestamp.valueOf(startLocalDate.atStartOfDay());
+        Timestamp endTime = Timestamp.valueOf(endLocalDate.atTime(23, 59, 59));
+        return measurementRepo.findByMeasuredBy_UsernameAndMeasuredDateBetween(username, startTime, endTime);
     }
 }
