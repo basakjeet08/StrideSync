@@ -1,6 +1,5 @@
 package dev.anirban.stridesync.entity;
 
-
 import dev.anirban.stridesync.dto.response.UserDto;
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,6 +11,7 @@ import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+
 
 @Getter
 @Setter
@@ -63,6 +63,19 @@ public class User implements UserDetails {
 
     @Column(name = "updated_at", nullable = false)
     private Timestamp updatedAt;
+
+    @OneToMany(
+            mappedBy = "measuredBy",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Measurement> measureHistory;
+
+    public void addMeasureHistory(Measurement measurement) {
+        measureHistory.add(measurement);
+        measurement.setMeasuredBy(this);
+    }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

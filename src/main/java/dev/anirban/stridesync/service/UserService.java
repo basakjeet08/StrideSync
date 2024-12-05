@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 
 @Service
@@ -36,6 +37,7 @@ public class UserService {
                 .roles(User.UserRole.USER)
                 .createdAt(Timestamp.valueOf(LocalDateTime.now()))
                 .updatedAt(Timestamp.valueOf(LocalDateTime.now()))
+                .measureHistory(new ArrayList<>())
                 .build();
 
         return userRepo.save(newUser);
