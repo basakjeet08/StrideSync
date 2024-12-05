@@ -17,4 +17,10 @@ public class UrlConstants {
     public static final String FIND_WATER_QUERY = "/waters";
     public static final String PUT_WATER_QUERY = "/waters";
     public static final String DELETE_WATER_QUERY = "/waters/{id}";
+
+    // Sleep Endpoints
+    public static final String CREATE_SLEEP = "/sleeps";
+    public static final String FIND_SLEEP_QUERY = "/sleeps";
+    public static final String PUT_SLEEP_QUERY = "/sleeps";
+    public static final String DELETE_SLEEP_QUERY = "/sleeps/{id}";
 }

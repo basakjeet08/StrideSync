@@ -80,6 +80,14 @@ public class User implements UserDetails {
     )
     private List<Water> waterHistory;
 
+    @OneToMany(
+            mappedBy = "sleptBy",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Sleep> sleepHistory;
+
     public void addMeasureHistory(Measurement measurement) {
         measureHistory.add(measurement);
         measurement.setMeasuredBy(this);
@@ -88,6 +96,11 @@ public class User implements UserDetails {
     public void addWaterHistory(Water water) {
         waterHistory.add(water);
         water.setDrankBy(this);
+    }
+
+    public void addSleepHistory(Sleep sleep) {
+        sleepHistory.add(sleep);
+        sleep.setSleptBy(this);
     }
 
     @Override
