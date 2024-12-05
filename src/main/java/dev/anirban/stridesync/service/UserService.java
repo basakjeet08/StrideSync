@@ -38,6 +38,10 @@ public class UserService {
                 .createdAt(Timestamp.valueOf(LocalDateTime.now()))
                 .updatedAt(Timestamp.valueOf(LocalDateTime.now()))
                 .measureHistory(new ArrayList<>())
+                .waterHistory(new ArrayList<>())
+                .sleepHistory(new ArrayList<>())
+                .activityHistory(new ArrayList<>())
+                .mealHistory(new ArrayList<>())
                 .build();
 
         return userRepo.save(newUser);

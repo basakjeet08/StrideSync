@@ -29,4 +29,10 @@ public class UrlConstants {
     public static final String FIND_ACTIVITY_QUERY = "/activities";
     public static final String PUT_ACTIVITY_QUERY = "/activities";
     public static final String DELETE_ACTIVITY_QUERY = "/activities/{id}";
+
+    // Meal Endpoints
+    public static final String CREATE_MEAL = "/meals";
+    public static final String FIND_MEAL_QUERY = "/meals";
+    public static final String PUT_MEAL_QUERY = "/meals";
+    public static final String DELETE_MEAL_QUERY = "/meals/{id}";
 }

@@ -96,6 +96,14 @@ public class User implements UserDetails {
     )
     private List<Activity> activityHistory;
 
+    @OneToMany(
+            mappedBy = "eatenBy",
+            fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Meal> mealHistory;
+
     public void addMeasureHistory(Measurement measurement) {
         measureHistory.add(measurement);
         measurement.setMeasuredBy(this);
@@ -114,6 +122,11 @@ public class User implements UserDetails {
     public void addActivityHistory(Activity activity) {
         activityHistory.add(activity);
         activity.setCompletedBy(this);
+    }
+
+    public void addMealHistory(Meal meal) {
+        mealHistory.add(meal);
+        meal.setEatenBy(this);
     }
 
     @Override
