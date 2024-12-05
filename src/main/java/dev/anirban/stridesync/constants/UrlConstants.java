@@ -6,6 +6,9 @@ public class UrlConstants {
     public static final String REGISTER_USER = "/register";
     public static final String LOGIN_USER = "/login";
 
+    // User Endpoints
+    public static final String DELETE_USER = "/users";
+
     // Measurement Endpoints
     public static final String CREATE_MEASUREMENT = "/measurements";
     public static final String FIND_MEASUREMENT_QUERY = "/measurements";

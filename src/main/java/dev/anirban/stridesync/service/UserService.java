@@ -52,4 +52,9 @@ public class UserService {
                 .findByUsername(username)
                 .orElseThrow(() -> new UserNotFound(username));
     }
+
+    public void deleteByUsername(String username) {
+        User user = findByUsername(username);
+        userRepo.delete(user);
+    }
 }
