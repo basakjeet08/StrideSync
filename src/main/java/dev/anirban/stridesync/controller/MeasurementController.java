@@ -1,7 +1,6 @@
 package dev.anirban.stridesync.controller;
 
 import dev.anirban.stridesync.constants.UrlConstants;
-import dev.anirban.stridesync.dto.request.CreateMeasurementDto;
 import dev.anirban.stridesync.dto.response.MeasurementDto;
 import dev.anirban.stridesync.dto.response.ResponseWrapper;
 import dev.anirban.stridesync.entity.Measurement;
@@ -23,7 +22,7 @@ public class MeasurementController {
     @PostMapping(UrlConstants.CREATE_MEASUREMENT)
     public ResponseWrapper<MeasurementDto> create(
             @AuthenticationPrincipal UserDetails userDetails,
-            @RequestBody CreateMeasurementDto measurementDto
+            @RequestBody MeasurementDto measurementDto
     ) {
 
         MeasurementDto data = service
@@ -54,5 +53,23 @@ public class MeasurementController {
                 .toList();
 
         return new ResponseWrapper<>(data);
+    }
+
+    @PutMapping(UrlConstants.PUT_MEASUREMENT_QUERY)
+    public ResponseWrapper<MeasurementDto> update(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @RequestBody MeasurementDto measurementDto
+    ) {
+        MeasurementDto data = service.update(userDetails.getUsername(), measurementDto).toMeasurementDto();
+        return new ResponseWrapper<>(data);
+    }
+
+    @DeleteMapping(UrlConstants.DELETE_MEASUREMENT_QUERY)
+    public ResponseWrapper<Object> deleteById(
+            @AuthenticationPrincipal UserDetails userDetails,
+            @PathVariable Integer id
+    ) {
+        service.deleteById(id, userDetails.getUsername());
+        return new ResponseWrapper<>("Measurement Deleted Successfully");
     }
 }

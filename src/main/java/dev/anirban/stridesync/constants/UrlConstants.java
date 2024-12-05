@@ -9,4 +9,6 @@ public class UrlConstants {
     // Measurement Endpoints
     public static final String CREATE_MEASUREMENT = "/measurements";
     public static final String FIND_MEASUREMENT_QUERY = "/measurements";
+    public static final String PUT_MEASUREMENT_QUERY = "/measurements";
+    public static final String DELETE_MEASUREMENT_QUERY = "/measurements/{id}";
 }
